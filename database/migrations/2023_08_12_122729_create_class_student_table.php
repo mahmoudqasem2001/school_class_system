@@ -1,0 +1,25 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateClassStudentTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('class_student', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('class_id');
+            $table->unsignedBigInteger('student_id');
+            $table->timestamps();
+            $table->foreign('class_id')->references('id')->on('classrooms');
+            $table->foreign('student_id')->references('id')->on('students');
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('class_student');
+    }
+}
